@@ -1,0 +1,2 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.xishui.beeger.datap.currency.spring.SpringContextUtil

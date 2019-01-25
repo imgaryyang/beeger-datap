@@ -1,0 +1,71 @@
+#tag layout_block("title") 欢迎 #end #tag layout_block("css")
+<link href="${url('/resources/css/github-markdown.css')}" rel="stylesheet">
+#end
+#tag layout_block("breadcrumb")
+#end
+#tag layout_block("mainContent")
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        #for(plugin:plugins)
+        <div class="col-md-3">
+            <div class="ibox">
+                <div class="ibox-content product-box">
+                    <div class="product-desc">
+                        #if(plugin.status == 1)
+                        <span class="badge label-success">${plugin.distinctStatus}</span>
+                        #end
+                        #if(plugin.status == 2)
+                        <span class="badge badge-waring">${plugin.distinctStatus}</span>
+                        #end
+                        #if(plugin.status == 3)
+                        <span class="badge badge-danger">${plugin.distinctStatus}</span>
+                        #end
+                        <p></p>
+                        <H3> ${plugin.pluginName}</H3>
+                        <hr>
+                        <h5>计算组件提供者</h5>
+                        <ul class="list-group clear-list m-t">
+                            <li class="list-group-item fist-item">
+                                <span class="pull-right">
+                                        ${plugin.machineCount}
+                                </span>
+                                <span class="label label-default"></span> 总计提供者
+                            </li>
+
+                            <li class="list-group-item">
+                                <span class="pull-right">
+                                        ${plugin.aliveCount}
+                                </span>
+                                <span class="label label-success"></span> 在线且可用
+                            </li>
+                            <li class="list-group-item">
+                                <span class="pull-right">
+                                    ${plugin.unliveCount}
+                                </span>
+                                <span class="label label-info"></span> 不在线且不可用
+                            </li>
+                            <li class="list-group-item">
+                                <span class="pull-right">
+                                   ${plugin.aliveUnUseCount}
+                                </span>
+                                <span class="label label-primary"></span> 在线且不可用
+                            </li>
+                        </ul>
+                        <div class="m-t text-righ">
+                            <a href="/plugin/detail?modelName=${plugin.pluginName}"
+                               class="btn btn-xs btn-outline btn-primary">点我详情 <i
+                                    class="fa fa-long-arrow-right"></i> </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        #end
+    </div>
+</div>
+
+<div class="row" style="padding: 10px 50px;">
+
+</div>
+#end
+#include("/common/framework.html")

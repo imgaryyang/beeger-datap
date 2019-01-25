@@ -1,0 +1,95 @@
+#tag layout_block("title") 欢迎 #end #tag layout_block("css")
+<link href="${url('/resources/css/github-markdown.css')}" rel="stylesheet">
+#end
+#tag layout_block("breadcrumb")
+#end
+#tag layout_block("mainContent")
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>新增计算组件</h5>
+            </div>
+            <div class="ibox-content">
+                <form class="form-horizontal">
+                    <div class="form-group has-success">
+                        <label class="col-sm-2 control-label">计算Jar名称</label>
+
+                        <div class="col-sm-7"><input type="text" id="pluginJarName" class="form-control"></div>
+                        <div class="col-sm-3">
+                            <button type="button" class="btn btn-primary" id="applyPlugin">提交计算组件</button>
+                            <button type="button" class="btn btn-danger" id="clearPlugin">清理计算组件</button>
+                        </div>
+                    </div>
+                    <div class="hr-line-dashed"></div>
+
+                    <ul>
+                        <li>确保您新增的计算组件已经上传至对应服务节点的对应目录(/opt/app/)</li>
+                        <li>确保您的计算组件已添加启动main函数类在/META-INF/compute-plugin.cfg中</li>
+                        <li>此方式是托管形新增组件方式</li>
+                        <li>清理计算组件,防止组件在系统中残留信息,导致提示提交成功,实际失败</li>
+                    </ul>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row" style="padding: 10px 50px;">
+
+</div>
+#end
+#tag layout_block("js")
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#applyPlugin').click(function () {
+            var jarName =$('#pluginJarName').val();
+            $.post("/plugin/applyAdded", {jarName: $.trim(jarName)}, function (result) {
+                if ("success" == result) {
+                    swal({
+                        title: "添加计算组件成功",
+                        type: "success"
+                    });
+                } else {
+                    swal({
+                        title: "添加计算组件失败",
+                        text: result,
+                        type: "warning",
+                        showCancelButton: true
+                    });
+                }
+            });
+        });
+        $('#clearPlugin').click(function () {
+            var jarName = $('#pluginJarName').val();
+            swal({
+                title: "确定清理计算组件吗",
+                text: jarName,
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "清理",
+                closeOnConfirm: false
+            }, function () {
+                $.post("/plugin/cleanPlugin", {jarName: $.trim(jarName)}, function (result) {
+                    if ("success" == result) {
+                        swal({
+                            title: "清理计算组件成功",
+                            type: "success"
+                        });
+                    } else {
+                        swal({
+                            title: "清理计算组件失败",
+                            text: result,
+                            type: "warning",
+                            showCancelButton: true
+                        });
+                    }
+                });
+            });
+
+        });
+    });
+</script>
+#end
+#include("/common/framework.html")
