@@ -13,3 +13,12 @@ CREATE TABLE `bg_compute_plugin` (
   `plugin_jar_path` varchar(500) DEFAULT NULL COMMENT '插件jar到位置,如果是远程,可以不管。',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8
+
+-- example table
+CREATE TABLE `example_user` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `user_name` varchar(100) DEFAULT NULL,
+  `age` int(11) DEFAULT NULL,
+  `phone` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8
