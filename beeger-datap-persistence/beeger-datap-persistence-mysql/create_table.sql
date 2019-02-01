@@ -12,7 +12,7 @@ CREATE TABLE `bg_compute_plugin` (
   `model_type` varchar(100) DEFAULT NULL COMMENT '计算模型类型:REMOTE,LOCAL',
   `plugin_jar_path` varchar(500) DEFAULT NULL COMMENT '插件jar到位置,如果是远程,可以不管。',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 -- example table
 CREATE TABLE `example_user` (
@@ -21,4 +21,8 @@ CREATE TABLE `example_user` (
   `age` int(11) DEFAULT NULL,
   `phone` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+INSERT INTO example_user
+(user_name, age, phone)
+VALUES('xishui', 18, '1212312');
